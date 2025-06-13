@@ -1,0 +1,74 @@
+using System.Collections.Generic;
+
+using UnityEngine;
+
+public class GlobalStateManager : MonoBehaviour
+{
+    public class _GlobalStateManager
+    {
+        public class _State
+        {
+            public readonly string name;
+
+            public _State(string name) { this.name = name; }
+
+            public delegate void Handler(_State state);
+
+            public event Handler OnEnter;
+            public event Handler OnExit;
+
+            internal void _Enter() { OnEnter?.Invoke(this); }
+
+            internal void _Exit() { OnExit?.Invoke(this); }
+        }
+
+        public static readonly _GlobalStateManager Instance;
+
+        static _GlobalStateManager() { Instance = new(); }
+
+        private Dictionary<string, _State> _states = new();
+        private Dictionary<_State, List<_State>> _transitions = new();
+
+        public _State State { private set; get; }
+
+        private _GlobalStateManager() { State = AddState("initial"); }
+
+        public _State GetState(string name)
+        {
+            if (_states.TryGetValue(name, out _State state)) return state;
+            return null;
+        }
+
+        public _State AddState(string name)
+        {
+            if (_states.TryGetValue(name, out _State state)) return state;
+            return _states[name] = new(name);
+        }
+
+        public _State AddTransition(string nameFrom, string nameTo)
+        {
+            _State stateFrom = AddState(nameFrom);
+            _State stateTo = AddState(nameTo);
+            if (!_transitions.TryGetValue(stateFrom, out List<_State> states))
+            {
+                (_transitions[stateFrom] = new()).Add(stateTo);
+                return stateTo;
+            }
+            if (!states.Contains(stateTo)) states.Add(stateTo);
+            return stateTo;
+        }
+
+        public _State TransitionTo(string nameTo)
+        {
+            if (!_states.TryGetValue(nameTo, out _State stateTo)) return null;
+            if (!_transitions.TryGetValue(State, out List<_State> states)) return null;
+            if (!states.Contains(stateTo)) return null;
+            State._Exit();
+            State = stateTo;
+            State._Enter();
+            return State;
+        }
+    }
+
+    public static readonly _GlobalStateManager Instance = _GlobalStateManager.Instance;
+}
