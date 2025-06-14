@@ -9,14 +9,18 @@ public class RevenantController : MonoBehaviour
     public Animator animator;
     public SplineAnimate splineToPlayer;
     public AudioSource audioSource;
-
     public AudioClip audioClip_HowYouDoin;
+    public Camera mainCamera;
+    public Renderer revenantRenderer;
 
     private void _ListeningState_OnEnter(GlobalStateManager._GlobalStateManager._State state) => Sequence_WalkToPlayer();
+
+    private void _SpottedState_OnEnter(GlobalStateManager._GlobalStateManager._State state) => Sequence_Spotted();
 
     private void Start()
     {
         splineToPlayer.Completed += Sequence_StandingAtPlayer;
+        GlobalStateManager.SpottedState.OnEnter += _SpottedState_OnEnter;
         GlobalStateManager.ListeningState.OnEnter += _ListeningState_OnEnter;
         Debug.Log("REMOVE ME!!!");
         GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ListeningState);
@@ -25,7 +29,22 @@ public class RevenantController : MonoBehaviour
     private void OnDisable()
     {
         GlobalStateManager.ListeningState.OnEnter -= _ListeningState_OnEnter;
+        GlobalStateManager.SpottedState.OnEnter -= _SpottedState_OnEnter;
         splineToPlayer.Completed -= Sequence_StandingAtPlayer;
+    }
+
+    private void FixedUpdate()
+    {
+        if (
+            GlobalStateManager.Instance.State == GlobalStateManager.ListeningState
+            && GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(mainCamera), revenantRenderer.bounds)
+        ) GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState);
+    }
+
+    public void Sequence_Spotted()
+    {
+        Anim_Idle();
+        Debug.Log("NOTHING TO SEE HERE");
     }
 
     [Button]
