@@ -23,6 +23,7 @@ public class RevenantController : MonoBehaviour
         GlobalStateManager.SpottedState.OnEnter += _SpottedState_OnEnter;
         GlobalStateManager.ListeningState.OnEnter += _ListeningState_OnEnter;
         Debug.Log("REMOVE ME!!!");
+        GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ReadyState);
         GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ListeningState);
     }
 

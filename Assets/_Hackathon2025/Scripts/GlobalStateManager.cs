@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using Meta.XR.MRUtilityKit;
 
 public class GlobalStateManager : MonoBehaviour
 {
@@ -99,10 +100,24 @@ public class GlobalStateManager : MonoBehaviour
 
     public static readonly _GlobalStateManager Instance = _GlobalStateManager.Instance;
     public static readonly _GlobalStateManager._State InitialState = Instance.State;
-    public static readonly _GlobalStateManager._State ListeningState = Instance.AddTransition(InitialState, "Listening");
+    public static readonly _GlobalStateManager._State ReadyState = Instance.AddTransition(InitialState, "Ready");
+    public static readonly _GlobalStateManager._State ListeningState = Instance.AddTransition(ReadyState, "Listening");
     public static readonly _GlobalStateManager._State PstKidState = Instance.AddTransition(ListeningState, "PstKid");
     public static readonly _GlobalStateManager._State PossessedState = Instance.AddTransition(PstKidState, "Possessed");
     public static readonly _GlobalStateManager._State SpottedState = Instance.AddTransition(ListeningState, "Spotted");
 
-    private void Start() { Instance._Init(); }
+    public MRUK MRUK;
+
+    private static void _SceneLoaded() => Instance.TransitionTo(ReadyState);
+
+    private void Start()
+    {
+        Instance._Init();
+        MRUK.Instance.SceneLoadedEvent.AddListener(_SceneLoaded);
+    }
+
+    private void OnDisable()
+    {
+        MRUK.Instance.SceneLoadedEvent.RemoveListener(_SceneLoaded);
+    }
 }
