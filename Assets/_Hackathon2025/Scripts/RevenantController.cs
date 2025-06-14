@@ -1,3 +1,4 @@
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -37,9 +38,10 @@ public class RevenantController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!IsVisible()) return;
-        if (GlobalStateManager.State == GlobalStateManager.ListeningState)
-        { GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState); }
-        else if (GlobalStateManager.State == GlobalStateManager.WaitingForPlayerToTurnAroundState)
+        // if (GlobalStateManager.State == GlobalStateManager.ListeningState)
+        // { GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState); }
+        // else 
+        if (GlobalStateManager.State == GlobalStateManager.WaitingForPlayerToTurnAroundState)
         { GlobalStateManager.Instance.TransitionTo(GlobalStateManager.PossessedState); }
     }
 
@@ -55,15 +57,16 @@ public class RevenantController : MonoBehaviour
     public void Sequence_WalkToPlayer()
     {
         Anim_Walk();
-        WalkToPlayer();
+        StartCoroutine("WalkToPlayer");
+        // WalkToPlayer();
     }
 
     public void Sequence_StandingAtPlayer()
     {
         GlobalStateManager.Instance.TransitionTo(GlobalStateManager.PstKidState);
         Anim_Idle();
-        audioSource.clip = audioClip_HowYouDoin;
-        audioSource.Play();
+        // audioSource.clip = audioClip_HowYouDoin;
+        // audioSource.Play();
     }
 
     public void Anim_Walk()
@@ -76,8 +79,9 @@ public class RevenantController : MonoBehaviour
         animator.SetBool("IsWalking", false);
     }
 
-    public void WalkToPlayer()
+    public IEnumerator WalkToPlayer()
     {
+        yield return new WaitForSeconds(5f);
         splineToPlayer.Play();
     }
 }

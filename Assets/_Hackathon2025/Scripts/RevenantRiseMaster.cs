@@ -7,7 +7,7 @@ public class RevenantRiseMaster : MonoBehaviour
 {
     public List<RevenantRise> revenantRiseOrderList = new List<RevenantRise>();
     public Transform playerTransform;
-
+public Transform revenantTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // void Start()
@@ -47,7 +47,8 @@ public class RevenantRiseMaster : MonoBehaviour
 
     public IEnumerator Sequence_RiseRevenants()
     {
-        transform.position = playerTransform.position;
+        transform.position = new Vector3(playerTransform.position.x, 0, playerTransform.position.z);
+        transform.forward = -revenantTransform.forward;
 
         yield return new WaitForSeconds(6f);
 
