@@ -99,6 +99,7 @@ public class GlobalStateManager : MonoBehaviour
     public static readonly _GlobalStateManager._State InitialState = Instance.State;
     public static readonly _GlobalStateManager._State ListeningState = Instance.AddTransition(InitialState, "Listening");
     public static readonly _GlobalStateManager._State PstKidState = Instance.AddTransition(ListeningState, "PstKid");
+    public static readonly _GlobalStateManager._State PossessedState = Instance.AddTransition(PstKidState, "Possessed");
     public static readonly _GlobalStateManager._State SpottedState = Instance.AddTransition(ListeningState, "Spotted");
 
     private void Start() { Instance._Init(); }
