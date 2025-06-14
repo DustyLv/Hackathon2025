@@ -32,16 +32,16 @@ public class IKController : MonoBehaviour
     {
         if (!ikActive) return;
 
-        Vector3 left = Player_LeftHand.localPosition;
-        Vector3 right = Player_RightHand.localPosition;
+        Vector3 right = Player_LeftHand.localPosition;
+        Vector3 left = Player_RightHand.localPosition;
         Vector3 head = Player_Head.localPosition;
 
-        Quaternion leftR = Player_LeftHand.localRotation;
-        Quaternion rightR = Player_RightHand.localRotation;
+        Quaternion rightR = Player_LeftHand.localRotation;
+        Quaternion leftR = Player_RightHand.localRotation;
         Quaternion headR = Player_Head.localRotation;
 
-        IKTarget_RightHand.localPosition = new Vector3(-right.x, right.y, right.z);
-        IKTarget_LeftHand.localPosition = new Vector3(-left.x, left.y, left.z);
+        IKTarget_RightHand.localPosition = new Vector3(right.x, right.y, right.z);
+        IKTarget_LeftHand.localPosition = new Vector3(left.x, left.y, left.z);
         IKTarget_Head.localPosition = new Vector3(-head.x, head.y, head.z);
 
         IKTarget_RightHand.localRotation = Quaternion.Euler(rightR.eulerAngles.x + 90f, -rightR.eulerAngles.y, -rightR.eulerAngles.z);
