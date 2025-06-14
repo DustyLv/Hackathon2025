@@ -1,7 +1,6 @@
 using System;
 using RootMotion.FinalIK;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class IKController : MonoBehaviour
 {
@@ -21,12 +20,9 @@ public class IKController : MonoBehaviour
     // public ParentConstraint LeftHandConstraint;
     // public ParentConstraint HeadConstraint;
 
-
-    
     private void Start()
     {
         GlobalStateManager.PossessedState.OnEnter += _PossessedState_OnEnter;
-        
     }
 
     private void OnDisable()
@@ -34,35 +30,32 @@ public class IKController : MonoBehaviour
         GlobalStateManager.PossessedState.OnEnter -= _PossessedState_OnEnter;
     }
 
+    [Button]
     private void _PossessedState_OnEnter(GlobalStateManager._GlobalStateManager._State state)
     {
         ikActive = true;
         Invoke(nameof(StopPossessedState), 50f);
     }
 
-
     public void LateUpdate()
     {
-        if (ikActive)
-        {
-            IKTarget_RightHand.localPosition = new Vector3(Player_LeftHand.localPosition.x,Player_LeftHand.localPosition.y,-Player_LeftHand.localPosition.z);
-            IKTarget_LeftHand.localPosition = new Vector3(Player_RightHand.localPosition.x,Player_RightHand.localPosition.y,-Player_RightHand.localPosition.z);
-            IKTarget_Head.localPosition = new Vector3(-Player_Head.localPosition.x,Player_Head.localPosition.y,Player_Head.localPosition.z);
-            
-            
-            IKTarget_RightHand.localRotation = Quaternion.Euler(Player_LeftHand.localRotation.eulerAngles.x + 90f, -Player_LeftHand.localRotation.eulerAngles.y, -Player_LeftHand.localRotation.eulerAngles.z);
-            IKTarget_LeftHand.localRotation = Quaternion.Euler(Player_RightHand.localRotation.eulerAngles.x + 90f, -Player_RightHand.localRotation.eulerAngles.y, -Player_RightHand.localRotation.eulerAngles.z);
-            IKTarget_Head.localRotation = Quaternion.Euler(Player_Head.localRotation.eulerAngles.x, -Player_Head.localRotation.eulerAngles.y, -Player_Head.localRotation.eulerAngles.z);
+        if (!ikActive) return;
 
-            // IKTarget_RightHand.localPosition = Player_LeftHand.localPosition;
-            // IKTarget_LeftHand.localPosition = Player_RightHand.localPosition;
-            // IKTarget_Head.localPosition = Player_Head.localPosition;
-            //
-            //
-            // IKTarget_RightHand.localRotation = Player_LeftHand.localRotation;
-            // IKTarget_LeftHand.localRotation = Player_RightHand.localRotation;
-            // IKTarget_Head.localRotation = Player_Head.localRotation;
-        }
+        Vector3 left = Player_LeftHand.localPosition;
+        Vector3 right = Player_RightHand.localPosition;
+        Vector3 head = Player_Head.localPosition;
+
+        Quaternion leftR = Player_LeftHand.localRotation;
+        Quaternion rightR = Player_RightHand.localRotation;
+        Quaternion headR = Player_Head.localRotation;
+
+        IKTarget_RightHand.localPosition = new Vector3(-right.x, right.y, right.z);
+        IKTarget_LeftHand.localPosition = new Vector3(-left.x, left.y, left.z);
+        IKTarget_Head.localPosition = new Vector3(-head.x, head.y, head.z);
+
+        IKTarget_RightHand.localRotation = Quaternion.Euler(rightR.eulerAngles.x + 90f, -rightR.eulerAngles.y, -rightR.eulerAngles.z);
+        IKTarget_LeftHand.localRotation = Quaternion.Euler(leftR.eulerAngles.x + 90f, -leftR.eulerAngles.y, -leftR.eulerAngles.z);
+        IKTarget_Head.localRotation = Quaternion.Euler(headR.eulerAngles.x, -headR.eulerAngles.y, -headR.eulerAngles.z);
     }
 
     public void StopPossessedState()
