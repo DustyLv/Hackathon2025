@@ -18,11 +18,13 @@ public class RevenantController : MonoBehaviour
     {
         splineToPlayer.Completed += Sequence_StandingAtPlayer;
         GlobalStateManager.ListeningState.OnEnter += _ListeningState_OnEnter;
-        // GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ListeningState);
+        Debug.Log("REMOVE ME!!!");
+        GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ListeningState);
     }
 
     private void OnDisable()
     {
+        GlobalStateManager.ListeningState.OnEnter -= _ListeningState_OnEnter;
         splineToPlayer.Completed -= Sequence_StandingAtPlayer;
     }
 
