@@ -58,4 +58,8 @@ public class RevenantRise : MonoBehaviour
     {
         animator.SetBool("Chanting", true);
     }
+    public void StopChant()
+    {
+        animator.SetBool("Chanting", false);
+    }
 }

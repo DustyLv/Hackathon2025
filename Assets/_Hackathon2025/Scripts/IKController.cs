@@ -34,7 +34,7 @@ public class IKController : MonoBehaviour
     private void _PossessedState_OnEnter(GlobalStateManager._GlobalStateManager._State state)
     {
         ikActive = true;
-        Invoke(nameof(StopPossessedState), 50f);
+        Invoke(nameof(StopPossessedState), 40f);
     }
 
     public void LateUpdate()
@@ -64,6 +64,7 @@ public class IKController : MonoBehaviour
         FullBodyBipedIK.solver.IKPositionWeight = 0f;
         FBBIKHeadEffector.positionWeight = 0f;
         FBBIKHeadEffector.rotationWeight = 0f;
+        RevenantRiseMaster.Instance.StopChanting();
         revenant.animator.SetTrigger("Attack");
     }
 }
