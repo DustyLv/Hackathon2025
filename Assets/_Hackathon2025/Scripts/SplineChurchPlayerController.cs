@@ -15,7 +15,7 @@ public class SplineChurchPlayerController : MonoBehaviour
         // offset.y = 0f;
         var normalizedOffset = offset.normalized;
         offset -= normalizedOffset;
-        normalizedOffset *= 1.5f;
+        normalizedOffset *= 1f;
         
         
         // offset -= Vector3.one;

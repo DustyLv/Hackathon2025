@@ -9,6 +9,7 @@ public class RevenantRise : MonoBehaviour
 
     public Vector3 startPositionOffset;
     public AudioSource riseSound;
+    public ParticleSystem particles;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,7 +28,15 @@ public class RevenantRise : MonoBehaviour
         {
             animator.SetTrigger("Rise");
             riseSound.PlayDelayed(2f);
-        }).OnComplete(() => { transform.DOMoveY(0f, 7f).OnComplete(() => { riseSound.Stop(); }); });
+            particles.Play();
+        }).OnComplete(() =>
+        {
+            transform.DOMoveY(0f, 7f).OnComplete(() =>
+            {
+                riseSound.Stop();
+                particles.Stop();
+            });
+        });
 
 
         // StartCoroutine("IE_Rise");

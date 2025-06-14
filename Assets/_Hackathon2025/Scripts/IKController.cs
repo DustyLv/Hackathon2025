@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using RootMotion.FinalIK;
 using UnityEngine;
 
