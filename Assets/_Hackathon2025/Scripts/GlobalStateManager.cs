@@ -8,9 +8,18 @@ public class GlobalStateManager : MonoBehaviour
     {
         public class _State
         {
+            private static void _LogEnter(_State state) { Debug.Log($"GSM entered {state.name}State"); }
+
+            private static void _LogExit(_State state) { Debug.Log($"GSM exited {state.name}State"); }
+
             public readonly string name;
 
-            public _State(string name) { this.name = name; }
+            public _State(string name)
+            {
+                this.name = name;
+                OnEnter += _LogEnter;
+                OnExit += _LogExit;
+            }
 
             public delegate void Handler(_State state);
 
@@ -22,16 +31,28 @@ public class GlobalStateManager : MonoBehaviour
             internal void _Exit() { OnExit?.Invoke(this); }
         }
 
+        private static void _LogInit() { Debug.Log($"GSM initializing"); }
+
         public static readonly _GlobalStateManager Instance;
 
-        static _GlobalStateManager() { Instance = new(); }
+        static _GlobalStateManager() { (Instance = new()).OnInit += _LogInit; }
 
         private Dictionary<string, _State> _states = new();
         private Dictionary<_State, List<_State>> _transitions = new();
 
+        public delegate void Handler();
+
+        public event Handler OnInit;
+
         public _State State { private set; get; }
 
         private _GlobalStateManager() { State = AddState("Initial"); }
+
+        internal void _Init()
+        {
+            OnInit?.Invoke();
+            State._Enter();
+        }
 
         public _State GetState(string name)
         {
@@ -80,5 +101,8 @@ public class GlobalStateManager : MonoBehaviour
     public static readonly _GlobalStateManager._State InitialState = Instance.State;
     public static readonly _GlobalStateManager._State ListeningState = Instance.AddTransition(InitialState, "Listening");
     public static readonly _GlobalStateManager._State PstKidState = Instance.AddTransition(ListeningState, "PstKid");
+    public static readonly _GlobalStateManager._State PossessedState = Instance.AddTransition(PstKidState, "Possessed");
     public static readonly _GlobalStateManager._State SpottedState = Instance.AddTransition(ListeningState, "Spotted");
+
+    private void Start() { Instance._Init(); }
 }
