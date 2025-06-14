@@ -8,12 +8,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Hackathon2025/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Hackathon2025/Scenes/Testing_Lauris.unity
     guid: 5f5c02ff43c03ee4587871e18907492a
+  - enabled: 1
+    path: Assets/_Hackathon2025/Scenes/Main_Scene_Shit.unity
+    guid: 69cc87ac1f646ee429fc7c1f23f3ae98
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 523c420cd28f5b94ca6896bf7ff6cfb4, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 3435f40bbb0563d4a9a7db97f7848bb9, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f47e7b4d037283345b5fa90c8b987a9b, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 5b8fe31556847b3408bc4cc89b236d48, type: 2}
   m_UseUCBPForAssetBundles: 0
