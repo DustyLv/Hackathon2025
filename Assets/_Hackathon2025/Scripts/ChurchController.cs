@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ChurchController : MonoBehaviour
 {
+    public AudioSource churchSoundEffect;
+    
     private void _PstKidState_OnEnter(GlobalStateManager._GlobalStateManager._State state) => Ding();
 
     private void Start()
@@ -16,5 +18,10 @@ public class ChurchController : MonoBehaviour
     }
 
     [Button]
-    public void Ding() { Debug.Log("DING"); }
+    public void Ding()
+    {
+        
+        churchSoundEffect.Play();
+        
+    }
 }
