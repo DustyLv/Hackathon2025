@@ -63,10 +63,10 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _EnvironmentReflections: 1
-    - _Float0: -0
-    - _Float1: 0.39
+    - _Float0: 0.05
+    - _Float1: 1.05
     - _Metallness: 0
-    - _NormalStrength: 10
+    - _NormalStrength: 0.67
     - _QueueControl: 0
     - _QueueOffset: 0
     - _REfPlane: 1
@@ -75,7 +75,7 @@ Material:
     - _SpecularHighlights: 1
     - __dirty: 0
     - _noiseScale: 0.65
-    - _scale: 0.31
+    - _scale: 0.55
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -8,6 +8,7 @@ public class RevenantRiseMaster : MonoBehaviour
     public List<RevenantRise> revenantRiseOrderList = new List<RevenantRise>();
     public Transform playerTransform;
 public Transform revenantTransform;
+public AudioSource chantAudio;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // void Start()
@@ -50,7 +51,7 @@ public Transform revenantTransform;
         transform.position = new Vector3(playerTransform.position.x, 0, playerTransform.position.z);
         transform.forward = -revenantTransform.forward;
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(10f);
 
         foreach (RevenantRise revenantRise in revenantRiseOrderList)
         {
@@ -64,5 +65,6 @@ public Transform revenantTransform;
         {
             revenantRise.Chant();
         }
+        chantAudio.Play();
     }
 }

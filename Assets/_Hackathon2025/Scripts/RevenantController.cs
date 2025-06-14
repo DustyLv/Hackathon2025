@@ -42,7 +42,9 @@ public class RevenantController : MonoBehaviour
         // { GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState); }
         // else 
         if (GlobalStateManager.State == GlobalStateManager.WaitingForPlayerToTurnAroundState)
-        { GlobalStateManager.Instance.TransitionTo(GlobalStateManager.PossessedState); }
+        {
+            GlobalStateManager.Instance.TransitionTo(GlobalStateManager.PossessedState);
+        }
     }
 
     public bool IsVisible() => GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(mainCamera), revenantRenderer.bounds);

@@ -1,10 +1,11 @@
 using System;
+using RootMotion.FinalIK;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class IKController : MonoBehaviour
 {
-
+    public RevenantController revenant;
     public bool ikActive = true;
     public Transform IKTarget_RightHand = null;
     public Transform IKTarget_LeftHand = null;
@@ -14,6 +15,8 @@ public class IKController : MonoBehaviour
     public Transform Player_LeftHand = null;
     public Transform Player_Head = null;
     
+    public FullBodyBipedIK FullBodyBipedIK = null;
+    public FBBIKHeadEffector FBBIKHeadEffector = null;
     // public ParentConstraint RightHandConstraint;
     // public ParentConstraint LeftHandConstraint;
     // public ParentConstraint HeadConstraint;
@@ -34,6 +37,7 @@ public class IKController : MonoBehaviour
     private void _PossessedState_OnEnter(GlobalStateManager._GlobalStateManager._State state)
     {
         ikActive = true;
+        Invoke(nameof(StopPossessedState), 50f);
     }
 
 
@@ -59,5 +63,14 @@ public class IKController : MonoBehaviour
             // IKTarget_LeftHand.localRotation = Player_RightHand.localRotation;
             // IKTarget_Head.localRotation = Player_Head.localRotation;
         }
+    }
+
+    public void StopPossessedState()
+    {
+        ikActive = false;
+        FullBodyBipedIK.solver.IKPositionWeight = 0f;
+        FBBIKHeadEffector.positionWeight = 0f;
+        FBBIKHeadEffector.rotationWeight = 0f;
+        revenant.animator.SetTrigger("Attack");
     }
 }
