@@ -36,11 +36,11 @@ public class RevenantController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (
-            GlobalStateManager.Instance.State == GlobalStateManager.ListeningState
-            && GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(mainCamera), revenantRenderer.bounds)
-        ) GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState);
+        if (GlobalStateManager.State == GlobalStateManager.ListeningState && IsVisible())
+            GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState);
     }
+
+    public bool IsVisible() => GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(mainCamera), revenantRenderer.bounds);
 
     public void Sequence_Spotted()
     {

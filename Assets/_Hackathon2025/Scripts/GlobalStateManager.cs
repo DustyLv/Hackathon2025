@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
-using Meta.XR.MRUtilityKit;
+// using Meta.XR.MRUtilityKit;
 
 public class GlobalStateManager : MonoBehaviour
 {
@@ -106,18 +106,19 @@ public class GlobalStateManager : MonoBehaviour
     public static readonly _GlobalStateManager._State PossessedState = Instance.AddTransition(PstKidState, "Possessed");
     public static readonly _GlobalStateManager._State SpottedState = Instance.AddTransition(ListeningState, "Spotted");
 
-    public MRUK MRUK;
+    public static _GlobalStateManager._State State { get => Instance.State; }
 
     private static void _SceneLoaded() => Instance.TransitionTo(ReadyState);
 
     private void Start()
     {
         Instance._Init();
-        MRUK.Instance.SceneLoadedEvent.AddListener(_SceneLoaded);
+        _SceneLoaded();
+        // MRUK.Instance.SceneLoadedEvent.AddListener(_SceneLoaded);
     }
 
     private void OnDisable()
     {
-        MRUK.Instance.SceneLoadedEvent.RemoveListener(_SceneLoaded);
+        // MRUK.Instance.SceneLoadedEvent.RemoveListener(_SceneLoaded);
     }
 }
