@@ -30,7 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9201824600089581841}
+  - {fileID: 2585600661877845240}
   - {fileID: 1053237270856866724}
+  - {fileID: 3736517070998463530}
   - {fileID: 5055011823177915427}
   m_Father: {fileID: 8085913280646468186}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ff3d32e8b84784a9f7bfdfe464c55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  revenant: {fileID: 0}
   ikActive: 1
   IKTarget_RightHand: {fileID: 9201824600089581841}
   IKTarget_LeftHand: {fileID: 1053237270856866724}
@@ -205,6 +208,8 @@ MonoBehaviour:
   Player_RightHand: {fileID: 0}
   Player_LeftHand: {fileID: 0}
   Player_Head: {fileID: 0}
+  FullBodyBipedIK: {fileID: 0}
+  FBBIKHeadEffector: {fileID: 0}
 --- !u!1 &3954030393943336812
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +276,68 @@ MonoBehaviour:
   chestDirection: {x: 0, y: 0, z: 1}
   chestDirectionWeight: 1
   chestBones: []
+--- !u!1 &4060951895932996904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3736517070998463530}
+  m_Layer: 0
+  m_Name: Left Elbow
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3736517070998463530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060951895932996904}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.9322743, y: -0.09182339, z: 0.29727, w: 0.18456326}
+  m_LocalPosition: {x: -0.2626084, y: 1.102, z: -0.284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7518810097650487056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5260809020044546475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2585600661877845240}
+  m_Layer: 0
+  m_Name: Right Elbow
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2585600661877845240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260809020044546475}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.9516436, y: -0.109973125, z: 0.23872805, w: -0.15902665}
+  m_LocalPosition: {x: 0.29139256, y: 1.0948677, z: -0.33055258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7518810097650487056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6006276181989474550
 GameObject:
   m_ObjectHideFlags: 0

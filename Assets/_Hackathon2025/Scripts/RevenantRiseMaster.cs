@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
@@ -15,6 +16,11 @@ public AudioSource chantAudio;
     // {
     //     // RiseRevenants();
     // }
+    public static RevenantRiseMaster Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -60,11 +66,21 @@ public AudioSource chantAudio;
             yield return new WaitForSeconds(2f);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         foreach (RevenantRise revenantRise in revenantRiseOrderList)
         {
             revenantRise.Chant();
         }
+        yield return new WaitForSeconds(1.5f);
         chantAudio.Play();
+    }
+
+    public void StopChanting()
+    {
+        foreach (RevenantRise revenantRise in revenantRiseOrderList)
+        {
+            revenantRise.Chant();
+        }
+        chantAudio.Stop();
     }
 }
