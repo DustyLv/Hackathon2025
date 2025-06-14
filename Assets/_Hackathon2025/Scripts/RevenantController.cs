@@ -1,6 +1,7 @@
 using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 
 public class RevenantController : MonoBehaviour
@@ -85,5 +86,25 @@ public class RevenantController : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         splineToPlayer.Play();
+    }
+
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
+        Invoke(nameof(DelayedScreenFade), 2f);
+    }
+
+    private void DelayedScreenFade()
+    {
+        OVRScreenFade.instance.FadeOut();
+        
+        Invoke(nameof(DelayedLoadScene), 3f);
+    }
+
+    private void DelayedLoadScene()
+    {
+        PlayerController.Instance.ResetTransform();
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }

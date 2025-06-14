@@ -65,6 +65,7 @@ public class IKController : MonoBehaviour
         FBBIKHeadEffector.positionWeight = 0f;
         FBBIKHeadEffector.rotationWeight = 0f;
         RevenantRiseMaster.Instance.StopChanting();
-        revenant.animator.SetTrigger("Attack");
+        revenant.Attack();
+        
     }
 }
