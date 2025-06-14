@@ -8,9 +8,9 @@ public class GlobalStateManager : MonoBehaviour
     {
         public class _State
         {
-            private static void _LogEnter(_State state) { Debug.Log($"Entered {state.name}State"); }
+            private static void _LogEnter(_State state) { Debug.Log($"GSM entered {state.name}State"); }
 
-            private static void _LogExit(_State state) { Debug.Log($"Exited {state.name}State"); }
+            private static void _LogExit(_State state) { Debug.Log($"GSM exited {state.name}State"); }
 
             public readonly string name;
 
@@ -31,9 +31,11 @@ public class GlobalStateManager : MonoBehaviour
             internal void _Exit() { OnExit?.Invoke(this); }
         }
 
+        private static void _LogInit() { Debug.Log($"GSM initializing"); }
+
         public static readonly _GlobalStateManager Instance;
 
-        static _GlobalStateManager() { Instance = new(); }
+        static _GlobalStateManager() { (Instance = new()).OnInit += _LogInit; }
 
         private Dictionary<string, _State> _states = new();
         private Dictionary<_State, List<_State>> _transitions = new();
