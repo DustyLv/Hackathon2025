@@ -1,4 +1,3 @@
-using System;
 using RootMotion.FinalIK;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ public class IKController : MonoBehaviour
     public Transform Player_RightHand = null;
     public Transform Player_LeftHand = null;
     public Transform Player_Head = null;
-    
+
     public FullBodyBipedIK FullBodyBipedIK = null;
     public FBBIKHeadEffector FBBIKHeadEffector = null;
     // public ParentConstraint RightHandConstraint;
@@ -30,7 +29,6 @@ public class IKController : MonoBehaviour
         GlobalStateManager.PossessedState.OnEnter -= _PossessedState_OnEnter;
     }
 
-    [Button]
     private void _PossessedState_OnEnter(GlobalStateManager._GlobalStateManager._State state)
     {
         ikActive = true;
