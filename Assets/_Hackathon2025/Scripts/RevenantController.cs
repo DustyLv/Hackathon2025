@@ -1,7 +1,5 @@
-using System;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Splines;
 
 public class RevenantController : MonoBehaviour
@@ -14,20 +12,18 @@ public class RevenantController : MonoBehaviour
 
     public AudioClip audioClip_HowYouDoin;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void _ListeningState_OnEnter(GlobalStateManager._GlobalStateManager._State state) => Sequence_WalkToPlayer();
+
+    private void Start()
     {
         splineToPlayer.Completed += Sequence_StandingAtPlayer;
+        GlobalStateManager.ListeningState.OnEnter += _ListeningState_OnEnter;
+        // GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ListeningState);
     }
 
     private void OnDisable()
     {
         splineToPlayer.Completed -= Sequence_StandingAtPlayer;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     [Button]
@@ -39,6 +35,7 @@ public class RevenantController : MonoBehaviour
 
     public void Sequence_StandingAtPlayer()
     {
+        GlobalStateManager.Instance.TransitionTo(GlobalStateManager.PstKidState);
         Anim_Idle();
         audioSource.clip = audioClip_HowYouDoin;
         audioSource.Play();
