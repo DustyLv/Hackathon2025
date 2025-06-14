@@ -53,8 +53,8 @@ public class IKController : MonoBehaviour
         IKTarget_LeftHand.localPosition = new Vector3(left.x, left.y, -left.z);
         IKTarget_Head.localPosition = new Vector3(-head.x, head.y, head.z);
 
-        IKTarget_RightHand.localRotation = Quaternion.Euler(rightR.eulerAngles.x, rightR.eulerAngles.y, rightR.eulerAngles.z);
-        IKTarget_LeftHand.localRotation = Quaternion.Euler(leftR.eulerAngles.x, leftR.eulerAngles.y, leftR.eulerAngles.z);
+        IKTarget_RightHand.localRotation = rightR;
+        IKTarget_LeftHand.localRotation = leftR;
         IKTarget_Head.localRotation = Quaternion.Euler(headR.eulerAngles.x, -headR.eulerAngles.y, -headR.eulerAngles.z);
     }
 
