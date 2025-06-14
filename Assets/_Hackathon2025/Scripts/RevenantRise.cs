@@ -45,4 +45,9 @@ public class RevenantRise : MonoBehaviour
 
         transform.localPosition += startPositionOffset;
     }
+
+    public void Chant()
+    {
+        
+    }
 }
