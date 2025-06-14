@@ -253,8 +253,8 @@ MonoBehaviour:
   positionWeight: 1
   bodyWeight: 0.8
   thighWeight: 0.8
-  handsPullBody: 1
-  rotationWeight: 0
+  handsPullBody: 0
+  rotationWeight: 1
   bodyClampWeight: 0.5
   headClampWeight: 0.5
   bendWeight: 1
