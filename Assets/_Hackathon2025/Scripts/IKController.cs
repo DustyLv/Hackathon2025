@@ -1,9 +1,11 @@
-using NaughtyAttributes;
+using System;
+using RootMotion.FinalIK;
 using UnityEngine;
 
 public class IKController : MonoBehaviour
 {
-    public bool ikActive = false;
+    public RevenantController revenant;
+    public bool ikActive = true;
     public Transform IKTarget_RightHand = null;
     public Transform IKTarget_LeftHand = null;
     public Transform IKTarget_Head = null;
@@ -11,6 +13,12 @@ public class IKController : MonoBehaviour
     public Transform Player_RightHand = null;
     public Transform Player_LeftHand = null;
     public Transform Player_Head = null;
+    
+    public FullBodyBipedIK FullBodyBipedIK = null;
+    public FBBIKHeadEffector FBBIKHeadEffector = null;
+    // public ParentConstraint RightHandConstraint;
+    // public ParentConstraint LeftHandConstraint;
+    // public ParentConstraint HeadConstraint;
 
     private void Start()
     {
@@ -26,6 +34,7 @@ public class IKController : MonoBehaviour
     private void _PossessedState_OnEnter(GlobalStateManager._GlobalStateManager._State state)
     {
         ikActive = true;
+        Invoke(nameof(StopPossessedState), 50f);
     }
 
     public void LateUpdate()
@@ -47,5 +56,14 @@ public class IKController : MonoBehaviour
         IKTarget_RightHand.localRotation = Quaternion.Euler(rightR.eulerAngles.x + 90f, -rightR.eulerAngles.y, -rightR.eulerAngles.z);
         IKTarget_LeftHand.localRotation = Quaternion.Euler(leftR.eulerAngles.x + 90f, -leftR.eulerAngles.y, -leftR.eulerAngles.z);
         IKTarget_Head.localRotation = Quaternion.Euler(headR.eulerAngles.x, -headR.eulerAngles.y, -headR.eulerAngles.z);
+    }
+
+    public void StopPossessedState()
+    {
+        ikActive = false;
+        FullBodyBipedIK.solver.IKPositionWeight = 0f;
+        FBBIKHeadEffector.positionWeight = 0f;
+        FBBIKHeadEffector.rotationWeight = 0f;
+        revenant.animator.SetTrigger("Attack");
     }
 }
