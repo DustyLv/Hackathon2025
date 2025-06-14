@@ -31,7 +31,7 @@ public class GlobalStateManager : MonoBehaviour
 
         public _State State { private set; get; }
 
-        private _GlobalStateManager() { State = AddState("initial"); }
+        private _GlobalStateManager() { State = AddState("Initial"); }
 
         public _State GetState(string name)
         {
@@ -44,6 +44,10 @@ public class GlobalStateManager : MonoBehaviour
             if (_states.TryGetValue(name, out _State state)) return state;
             return _states[name] = new(name);
         }
+
+        public _State AddTransition(_State stateFrom, _State stateTo) => AddTransition(stateFrom.name, stateTo.name);
+
+        public _State AddTransition(_State stateFrom, string nameTo) => AddTransition(stateFrom.name, nameTo);
 
         public _State AddTransition(string nameFrom, string nameTo)
         {
@@ -58,6 +62,8 @@ public class GlobalStateManager : MonoBehaviour
             return stateTo;
         }
 
+        public _State TransitionTo(_State stateTo) => TransitionTo(stateTo.name);
+
         public _State TransitionTo(string nameTo)
         {
             if (!_states.TryGetValue(nameTo, out _State stateTo)) return null;
@@ -71,4 +77,8 @@ public class GlobalStateManager : MonoBehaviour
     }
 
     public static readonly _GlobalStateManager Instance = _GlobalStateManager.Instance;
+    public static readonly _GlobalStateManager._State InitialState = Instance.State;
+    public static readonly _GlobalStateManager._State ListeningState = Instance.AddTransition(InitialState, "Listening");
+    public static readonly _GlobalStateManager._State PstKidState = Instance.AddTransition(ListeningState, "PstKid");
+    public static readonly _GlobalStateManager._State SpottedState = Instance.AddTransition(ListeningState, "Spotted");
 }
