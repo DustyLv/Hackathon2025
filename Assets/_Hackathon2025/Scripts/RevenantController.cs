@@ -98,7 +98,7 @@ public class RevenantController : MonoBehaviour
     {
         OVRScreenFade.instance.FadeOut();
         
-        Invoke(nameof(DelayedLoadScene), 3f);
+        // Invoke(nameof(DelayedLoadScene), 13f);
     }
 
     private void DelayedLoadScene()
