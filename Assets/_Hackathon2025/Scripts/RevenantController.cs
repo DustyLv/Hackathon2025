@@ -41,7 +41,7 @@ public class RevenantController : MonoBehaviour
         if (!IsVisible()) return;
         // if (GlobalStateManager.State == GlobalStateManager.ListeningState)
         // { GlobalStateManager.Instance.TransitionTo(GlobalStateManager.SpottedState); }
-        // else 
+        // else
         if (GlobalStateManager.State == GlobalStateManager.WaitingForPlayerToTurnAroundState)
         {
             GlobalStateManager.Instance.TransitionTo(GlobalStateManager.PossessedState);
@@ -97,7 +97,7 @@ public class RevenantController : MonoBehaviour
     private void DelayedScreenFade()
     {
         OVRScreenFade.instance.FadeOut();
-        
+
         // Invoke(nameof(DelayedLoadScene), 13f);
     }
 
