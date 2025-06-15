@@ -1,5 +1,3 @@
-using System;
-using NaughtyAttributes;
 using RootMotion.FinalIK;
 using UnityEngine;
 
@@ -17,9 +15,6 @@ public class IKController : MonoBehaviour
 
     public FullBodyBipedIK FullBodyBipedIK = null;
     public FBBIKHeadEffector FBBIKHeadEffector = null;
-    // public ParentConstraint RightHandConstraint;
-    // public ParentConstraint LeftHandConstraint;
-    // public ParentConstraint HeadConstraint;
 
     private void Start()
     {
@@ -51,11 +46,11 @@ public class IKController : MonoBehaviour
 
         IKTarget_RightHand.localPosition = new Vector3(right.x, right.y, -right.z);
         IKTarget_LeftHand.localPosition = new Vector3(left.x, left.y, -left.z);
-        IKTarget_Head.localPosition = new Vector3(-head.x, head.y, head.z);
+        // IKTarget_Head.localPosition = new Vector3(head.x, head.y, head.z);
 
-        IKTarget_RightHand.localRotation = (rightR * Quaternion.Euler(-90, 0, 0)) * Quaternion.Euler(0, 0, 180);
-        IKTarget_LeftHand.localRotation = (leftR * Quaternion.Euler(-90, 0, 0)) * Quaternion.Euler(0, 0, 180);
-        IKTarget_Head.localRotation = Quaternion.Euler(headR.eulerAngles.x, -headR.eulerAngles.y, -headR.eulerAngles.z);
+        IKTarget_RightHand.localRotation = Quaternion.Euler(-rightR.eulerAngles.x, -rightR.eulerAngles.y, rightR.eulerAngles.z);
+        IKTarget_LeftHand.localRotation = Quaternion.Euler(-leftR.eulerAngles.x, -leftR.eulerAngles.y, leftR.eulerAngles.z);
+        // IKTarget_Head.localRotation = Quaternion.Euler(headR.eulerAngles.x, headR.eulerAngles.y, headR.eulerAngles.z);
     }
 
     public void StopPossessedState()
@@ -66,6 +61,5 @@ public class IKController : MonoBehaviour
         FBBIKHeadEffector.rotationWeight = 0f;
         RevenantRiseMaster.Instance.StopChanting();
         revenant.Attack();
-
     }
 }

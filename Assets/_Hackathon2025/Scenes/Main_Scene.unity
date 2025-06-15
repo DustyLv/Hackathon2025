@@ -700,6 +700,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3279909339213740968, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
   m_PrefabInstance: {fileID: 195738041}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &195738044 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5275037780604170013, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
+  m_PrefabInstance: {fileID: 195738041}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &195738045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1864455475978700213, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
@@ -710,6 +721,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1044712897626855882, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
   m_PrefabInstance: {fileID: 195738041}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &195738047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1874582509581088535, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
+  m_PrefabInstance: {fileID: 195738041}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &238762488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4551547385376573567, guid: 8bd3bb607acd3f94d951568352b7500d, type: 3}
@@ -2209,9 +2231,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 195738047}
+    - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
       propertyPath: revenant
       value: 
       objectReference: {fileID: 811573932}
+    - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 195738044}
     - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
       propertyPath: Player_Head
       value: 

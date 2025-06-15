@@ -349,6 +349,17 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!114 &476427110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1874582509581088535, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
+  m_PrefabInstance: {fileID: 5977997466807459213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &524636734 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2048801693311718332, guid: a6ed9c9b507af8444b1f7f0b846d3ea5, type: 3}
@@ -476,6 +487,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1910341597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5275037780604170013, guid: 3a62f5e95990b6541a1a1942c5735f82, type: 3}
+  m_PrefabInstance: {fileID: 5977997466807459213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2041021267 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7278776041507104077, guid: 7a7358a9529288f45be6e251218398bb, type: 3}
@@ -682,6 +704,14 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 5977997466807459214}
+    - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 476427110}
+    - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 1910341597}
     - target: {fileID: 2839284912593191936, guid: 04e9e3562fb90944a8538281715570c0, type: 3}
       propertyPath: Player_Head
       value: 
