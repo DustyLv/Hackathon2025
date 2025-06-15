@@ -8,23 +8,15 @@ public class SplineChurchPlayerController : MonoBehaviour
     public Transform revenantTransform;
     public void SetSplineEndpoint()
     {
-        var length = splineContainer.Spline.Count - 1;
-        var firstKnot = splineContainer.Spline.ToArray()[length];
-        Vector3 playerPosition = new Vector3(playerTransform.position.x, 0f, playerTransform.position.z);
-        Vector3 offset = revenantTransform.position - playerPosition;
-        // offset.y = 0f;
-        var normalizedOffset = offset.normalized;
-        offset -= normalizedOffset;
-        normalizedOffset *= 1f;
-        
-        
-        // offset -= Vector3.one;
-        offset.y = 0f;
-        // normalizedOffset.y = 0f;
-        firstKnot.Position = splineContainer.transform.InverseTransformPoint(playerPosition + normalizedOffset);
-        firstKnot.Position.y = 0f;
-        firstKnot.Rotation = Quaternion.Inverse(splineContainer.transform.rotation) * playerTransform.rotation;
-
-        splineContainer.Spline.SetKnot(length, firstKnot);
+        Vector3 target = playerTransform.position;
+        Vector3 pos = revenantTransform.position;
+        Vector3 posRelToTarget = pos - target;
+        Vector3 stop = posRelToTarget.normalized;
+        Vector3 stopGlobal = target + stop;
+        int id = splineContainer.Spline.Count - 1;
+        BezierKnot knot = splineContainer.Spline.ToArray()[id];
+        knot.Position = splineContainer.transform.InverseTransformPoint(new Vector3(stopGlobal.x, 0, stopGlobal.z));
+        knot.Rotation = Quaternion.Euler(0, playerTransform.rotation.eulerAngles.y, 0);
+        splineContainer.Spline.SetKnot(id, knot);
     }
 }
