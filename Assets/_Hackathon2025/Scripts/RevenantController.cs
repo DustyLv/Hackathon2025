@@ -3,6 +3,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
+using UnityEngine.Video;
 
 public class RevenantController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class RevenantController : MonoBehaviour
     public Camera mainCamera;
     public Renderer revenantRenderer;
 
+    public VideoPlayer videoPlayer;
+
     private void _ListeningState_OnEnter(GlobalStateManager._GlobalStateManager._State state) => Sequence_WalkToPlayer();
 
     private void _SpottedState_OnEnter(GlobalStateManager._GlobalStateManager._State state) => Sequence_Spotted();
@@ -24,6 +27,7 @@ public class RevenantController : MonoBehaviour
         splineToPlayer.Completed += Sequence_StandingAtPlayer;
         GlobalStateManager.SpottedState.OnEnter += _SpottedState_OnEnter;
         GlobalStateManager.ListeningState.OnEnter += _ListeningState_OnEnter;
+        revenantRenderer.enabled = false;
         // Debug.Log("REMOVE ME!!!");
         // GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ReadyState);
         // GlobalStateManager.Instance.TransitionTo(GlobalStateManager.ListeningState);
@@ -85,19 +89,23 @@ public class RevenantController : MonoBehaviour
     public IEnumerator WalkToPlayer()
     {
         yield return new WaitForSeconds(5f);
+        revenantRenderer.enabled = true;
         splineToPlayer.Play();
     }
 
     public void Attack()
     {
         animator.SetTrigger("Attack");
-        Invoke(nameof(DelayedScreenFade), 2f);
+        // Invoke(nameof(DelayedScreenFade), 5.4f);
+        StartCoroutine(DelayedScreenFade());
     }
 
-    private void DelayedScreenFade()
+    private IEnumerator DelayedScreenFade()
     {
+        yield return new WaitForSeconds(5.6f);
         OVRScreenFade.instance.FadeOut();
-
+        yield return new WaitForSeconds(1.2f);
+        videoPlayer.Stop();
         // Invoke(nameof(DelayedLoadScene), 13f);
     }
 

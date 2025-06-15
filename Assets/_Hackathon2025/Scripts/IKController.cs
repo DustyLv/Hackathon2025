@@ -12,6 +12,8 @@ public class IKController : MonoBehaviour
     public Transform Player_RightHand = null;
     public Transform Player_LeftHand = null;
     public Transform Player_Head = null;
+    
+    public Transform ArmatureHead = null;
 
     public FullBodyBipedIK FullBodyBipedIK = null;
     public FBBIKHeadEffector FBBIKHeadEffector = null;
@@ -47,10 +49,13 @@ public class IKController : MonoBehaviour
         IKTarget_RightHand.localPosition = new Vector3(right.x, right.y, -(right.z - 0.1f));
         IKTarget_LeftHand.localPosition = new Vector3(left.x, left.y, -(left.z - 0.1f));
         IKTarget_Head.localPosition = new Vector3(head.x, head.y, -head.z);
+        // ArmatureHead.localPosition = new Vector3(head.x, head.y, -head.z);
 
         IKTarget_RightHand.localRotation = Quaternion.Euler(-rightR.eulerAngles.x, -rightR.eulerAngles.y, rightR.eulerAngles.z);
         IKTarget_LeftHand.localRotation = Quaternion.Euler(-leftR.eulerAngles.x, -leftR.eulerAngles.y, leftR.eulerAngles.z);
-        IKTarget_Head.localRotation = Quaternion.Euler(-headR.eulerAngles.x, headR.eulerAngles.y, headR.eulerAngles.z);
+        // IKTarget_Head.localRotation = Quaternion.Euler(-headR.eulerAngles.x, headR.eulerAngles.y, headR.eulerAngles.z);
+        
+        ArmatureHead.localRotation = Quaternion.Euler(headR.eulerAngles.x, -headR.eulerAngles.y -175f, headR.eulerAngles.z);
     }
 
     public void StopPossessedState()
